@@ -7,6 +7,8 @@
   
   After installation of all required ( node js and python, angular cli and update dependencies ) it is just required to run the portal deploying by ng serve.
   
+  Python version used ( 3.8 )
+  
   The pages have a simple menu of accounts list and creation of accounts ( no validation for accounts creation, just removal of duped accounts ) 
   The pages require some pretify and js/bootstrap. ( just the basic functionality is there ).
   
