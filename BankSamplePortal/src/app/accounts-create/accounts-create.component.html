@@ -1,0 +1,61 @@
+<p>Create Acc</p>
+<p>Create Mass Accounts</p>
+
+<h3>Create Account</h3>
+ 
+<div class="form-group">
+    <form [formGroup]="accountForm" (ngSubmit)="readAndPostAccount()" >
+        <div>
+            <label>Bank Name: </label>
+            <input type="text" formControlName="bankname" placeholder="Enter bank name"/>
+        </div>
+        <div>
+            <label>Card Number: </label>
+            <input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" formControlName="cardnumber" />
+        </div>
+        <div>
+            <label>Expire Date: </label>
+            <input type="text" placeholder="Enter expire date" formControlName="expiredate" />
+        </div>
+        <button class="btn btn-primary" type="submit"> Create Account </button>
+    </form>
+</div>
+
+<br>
+<br>
+
+<p>To upload csv file please, use this form</p>
+
+<angular-file-uploader [config]="afuConfig">
+</angular-file-uploader>
+
+<div class="form-group">
+    <form [formGroup]="accountForm" (ngSubmit)="submitFile()" >
+        <script>
+        function fileValidation() {
+            var fileInput =
+                document.getElementById('file');
+                
+            var filePath = fileInput.value;
+            
+            // Allowing file type
+            var allowedExtensions =/(\.csv)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+                alert('Invalid file type');
+                fileInput.value = '';
+                return false;
+            }
+        }
+        </script>
+        <label for="file">File</label>
+        <input formControlName="fileSource" id="fileSource" type="file" class="form-control" (change)="onFileChange($event)">
+        <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
+            <div *ngIf="f['file'].errors && f['file'].errors['required']">File is required.</div>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit File</button>
+    </form>
+</div>
+        
+
+ 
+
