@@ -2,8 +2,6 @@ import { Component, Inject , OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { FormGroup, FormControl, FormArray, Validators, NgForm} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule }   from '@angular/forms';
-import { AngularFileUploaderModule } from 'angular-file-uploader';
 
 @Component({
   selector: 'app-accounts-create',
@@ -16,16 +14,6 @@ export class AccountsCreateComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  afuConfig = {
-    uploadAPI: {
-      multiple: false,
-      formatsAllowed: ".csv",
-      maxSize: "1",
-      url:"http://localhost:8000/account/file"
-    }
-  };
-
   account: any;
 
   readAndPostAccount(){
@@ -56,20 +44,20 @@ export class AccountsCreateComponent implements OnInit {
 
   onFileChange(event:any) {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
       this.fileForm.patchValue({
-        fileSource: file
+        file: event.target.files[0]
       });
     }
   } 
 
   postAccount(acc:any) {
     console.log("Function postAccount() called")
+    if (this.accountForm.valid)
     console.log(this.createObjectAccount())
       this.http.post('http://localhost:8000/account', this.createObjectAccount(),  { headers: this.service.headers})
         .subscribe(res => {
           console.log(res);
-          alert('Uploaded Successfully.');
+          alert('Uploaded Successfully.')
         })
   }  
   
@@ -80,9 +68,10 @@ export class AccountsCreateComponent implements OnInit {
    * @return response()
    */
     submitFile(){
-      console.log("Function submit() called")
-      console.log(this.fileForm.value.fileSource)
-      this.http.post('http://localhost:8000/account/file', { file : this.fileForm.value.fileSource })
+      const formData = new FormData();
+      formData.append('file', this.fileForm.value.file!);
+      console.log(this.fileForm.value);
+      this.http.post('http://localhost:8000/account/file', formData, { headers: { "enctype":"multipart/form-data", 'Accept': 'application/json' }, reportProgress: true})
         .subscribe(res => {
           console.log(res);
           alert('Uploaded Successfully.');

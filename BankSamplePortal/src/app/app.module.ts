@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AccountsDetailComponent } from './accounts-detail/accounts-detail.component';
 import { AccountsCreateComponent } from './accounts-create/accounts-create.component';
 import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
-import { AngularFileUploaderModule } from "angular-file-uploader";
 
 
 @NgModule({
@@ -20,8 +19,7 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    AngularFileUploaderModule   
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

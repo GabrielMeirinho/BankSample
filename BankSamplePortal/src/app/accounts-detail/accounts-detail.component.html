@@ -1,20 +1,20 @@
-<div *ngIf="loading" class="overlay">
-    //Some html for the loading screen.
-</div>
-<p>Get Acc</p>
-<p>Get Table of Accounts</p>
-<table class='table'>
+<div ui-view="header" autoscroll="false">
+  <h2 alignright="200+x">Accounts</h2>
+  <table class="table" border="1" [width]="1000">
     <thead>
       <tr>
-        <th>Bank Name</th>
-        <th>Card Number</th>
-        <th>Expire Date</th>
+        <th scope="col">&nbsp;Bank Name&nbsp;</th>
+        <th scope="col">&nbsp;Card Number&nbsp;</th>
+        <th scope="col">&nbsp;Expire Date&nbsp;</th>
       </tr>
     </thead>
     <tbody>
-        <div *ngFor="let account of accounts">
-            <td>{{account.bankname}}</td>
-        </div>
+      <tr  scope="row" *ngFor="let account of accounts">
+        <td>&nbsp;{{account.bankname}}&nbsp;</td>
+        <td>&nbsp;{{account.cardnumber}}&nbsp;</td>
+        <td>&nbsp;{{account.expiredate}}&nbsp;</td>
+      </tr>
     </tbody>
   </table>
+</div>
 

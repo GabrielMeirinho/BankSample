@@ -1,21 +1,18 @@
-<p>Create Acc</p>
-<p>Create Mass Accounts</p>
-
 <h3>Create Account</h3>
  
 <div class="form-group">
     <form [formGroup]="accountForm" (ngSubmit)="readAndPostAccount()" >
         <div>
             <label>Bank Name: </label>
-            <input type="text" formControlName="bankname" placeholder="Enter bank name"/>
+            <input type="text" required minlength="4" formControlName="bankname" placeholder="Enter bank name"/>
         </div>
         <div>
             <label>Card Number: </label>
-            <input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" formControlName="cardnumber" />
+            <input type="text" required minlength="19" maxlength="19"  data-inputmask="'mask': '9999-9999-9999-9999'" placeholder="XXXX-XXXX-XXXX-XXXX" formControlName="cardnumber" />
         </div>
         <div>
             <label>Expire Date: </label>
-            <input type="text" placeholder="Enter expire date" formControlName="expiredate" />
+            <input type="date" required minlength="10" maxlength="10" placeholder="Enter expire date"  min="2022-01-01" max="2050-12-31" formControlName="expiredate" />
         </div>
         <button class="btn btn-primary" type="submit"> Create Account </button>
     </form>
@@ -26,11 +23,8 @@
 
 <p>To upload csv file please, use this form</p>
 
-<angular-file-uploader [config]="afuConfig">
-</angular-file-uploader>
-
 <div class="form-group">
-    <form [formGroup]="accountForm" (ngSubmit)="submitFile()" >
+    <form [formGroup]="fileForm" (ngSubmit)="submitFile()" >
         <script>
         function fileValidation() {
             var fileInput =

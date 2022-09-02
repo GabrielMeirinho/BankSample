@@ -26,7 +26,7 @@ export class AccountsDetailComponent implements OnInit {
   }
 
   loadAccounts() {
-    this.service.getAccounts().subscribe( data => { this.accounts = data; console.log(data)});
+    this.service.getAccounts().subscribe( data => { this.accounts = data.data; console.log(data)});
                       
   }
 
